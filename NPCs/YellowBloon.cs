@@ -6,27 +6,27 @@ using Terraria.ModLoader.Utilities;
 
 namespace TerraBloons.NPCs
 {
-	public class RedBloon : ModNPC
+	public class YellowBloon : ModNPC
 	{
 		public override void SetDefaults()
 		{
 			NPC.width = 22;
 			NPC.height = 28;
-			NPC.damage = 5;
-			NPC.lifeMax = 10;
+			NPC.damage = 14;
+			NPC.lifeMax = 40;
 			NPC.HitSound = SoundID.NPCDeath63;
 			NPC.DeathSound = SoundID.NPCDeath63;
-			NPC.value = 1.0f;
+			NPC.value = 100.0f;
 			NPC.aiStyle = 14; // Bat AI
 			NPC.noGravity = true;
-			NPC.npcSlots = 0.5f;
-			NPC.scale = 0.925f;
+			NPC.npcSlots = 1.25f;
+			NPC.scale = 1.15f;
 			NPC.buffImmune[BuffID.Bleeding] = true;
 			NPC.buffImmune[BuffID.Poisoned] = true;
 		}
 
-		public override float SpawnChance(NPCSpawnInfo spawnInfo) => SpawnCondition.OverworldDaySlime.Chance * 0.25f;
-		public override void ModifyNPCLoot(NPCLoot npcLoot) => npcLoot.Add(ItemDropRule.NormalvsExpert(ItemID.ShinyRedBalloon, 1000, 500));
+		public override float SpawnChance(NPCSpawnInfo spawnInfo) => SpawnCondition.OverworldDaySlime.Chance * 0.025f;
+		public override void OnKill() => NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<GreenBloon>());
 
 		public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
 		{
